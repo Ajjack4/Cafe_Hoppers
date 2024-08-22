@@ -2,12 +2,15 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import ContextProvider from './context/ContextProvider.tsx'
+
+import { StoreProvider } from './slice/StoreProvider.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ContextProvider>
+    <StoreProvider>
     <App />
-    </ContextProvider>
+    </StoreProvider>
+  
+   
   </StrictMode>,
 )
