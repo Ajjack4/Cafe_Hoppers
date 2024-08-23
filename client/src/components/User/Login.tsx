@@ -9,7 +9,7 @@ import {
   IconButton,
   TextField,
 } from "@mui/material";
-import {  SET_LOGIN_CLOSE} from "../../slice/slice";
+import {  SET_LOGIN_CLOSE,UPDATE_ALERT,START_LOADING, END_LOADING} from "../../slice/slice";
 import { useDispatch } from "react-redux";
 import { RootState } from "../../slice/stateStore";
 import { useSelector } from "react-redux";
@@ -34,6 +34,27 @@ const Login = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+
+    //testing loading
+    dispatch(START_LOADING())
+    setTimeout(()=>{
+      dispatch(END_LOADING())
+    },6000)
+    //testing
+    const Password=passwordRef.current?.value;
+    const ConfirmPassword=confirmPasswordRef.current?.value;
+    if(Password!==ConfirmPassword){
+      dispatch(UPDATE_ALERT({
+        ...user,
+        alert:{
+          open:true,
+          severity:"error",
+          message:'Passwords do not match',
+          
+        }
+      }))
+    }
   };
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
