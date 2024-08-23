@@ -2,11 +2,11 @@ import { createSlice , PayloadAction} from "@reduxjs/toolkit";
 
 type User = {
   name: string | null;
-  Login: boolean;
+  IsLoginOpen: boolean;
 };
 const initialState: User = {
   name: null,
-  Login: false,
+  IsLoginOpen: false,
 };
 export const UserSlice = createSlice({
   name: "user",
@@ -15,9 +15,15 @@ export const UserSlice = createSlice({
     UPDATEUSER(state, action:PayloadAction<User>) {
       state.name=action.payload.name
     },
+    SET_LOGIN_OPEN(state) {
+      state.IsLoginOpen=true
+    },
+    SET_LOGIN_CLOSE(state){
+      state.IsLoginOpen=false
+    },
    
   },
 });
-export const { UPDATEUSER } = UserSlice.actions;
+export const { UPDATEUSER ,SET_LOGIN_OPEN,SET_LOGIN_CLOSE} = UserSlice.actions;
 export const userReducer=UserSlice.reducer;
 export default UserSlice.reducer;

@@ -1,11 +1,16 @@
 
+
+import Login from '../components/User/Login'
 import Navbar from '../components/Navbar'
 
 const Home = () => {
   return (
-    <div>
+    <>
+      
+      
       <Navbar/>
-    </div>
+      <Login/>
+    </>
   )
 }
 

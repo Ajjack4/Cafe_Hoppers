@@ -1,14 +1,23 @@
-import { useValue } from '../context/ContextProvider';
+
 import logo from '../assets/Seekerra-logo.png'
-import Usericon from '../User/Usericon';
+import Usericon from './User/Usericon';
+import {SET_LOGIN_OPEN} from '../slice/slice'
+import { useDispatch } from 'react-redux';
+import { RootState } from "../slice/stateStore";
+import {  useSelector } from "react-redux";
 
-const user={name:"test" ,logo }
-
-const Navbar = () => {
-    const {
-      state:{currentUser},
-      dispatch,
-  }=useValue()
+ 
+const Navbar = () => { 
+const dispatch=useDispatch(); 
+const user = useSelector((state: RootState) => state.user);
+  const handlesubmit=()=>{
+   console.log(user)
+    dispatch(SET_LOGIN_OPEN())
+  }
+  //   const {
+  //     state:{currentUser},
+  //     dispatch,
+  // }=useValue()
   return (
     <nav className="bg-[#ADD899] border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -145,7 +154,7 @@ const Navbar = () => {
                 href="#"
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
-                {!currentUser? (<button onClick={()=>{dispatch({type:'UPDATE_USER',payload:user})}}>Login</button>):(<Usericon/>)}
+                {!user.name? (<button onClick={handlesubmit}>Login</button>):(<Usericon/>)}
                 
               </a>
             </li>
