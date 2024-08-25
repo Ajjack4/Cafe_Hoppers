@@ -11,7 +11,7 @@ const Navbar = () => {
 const dispatch=useDispatch(); 
 const user = useSelector((state: RootState) => state.user);
   const handlesubmit=()=>{
-   console.log(user)
+   
     dispatch(SET_LOGIN_OPEN())
   }
   //   const {
