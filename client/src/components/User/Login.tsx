@@ -9,21 +9,21 @@ import {
   IconButton,
   TextField,
 } from "@mui/material";
-import {  SET_LOGIN_CLOSE,UPDATE_ALERT,START_LOADING, END_LOADING} from "../../slice/slice";
+import { SET_LOGIN_CLOSE, UPDATE_ALERT, START_LOADING, END_LOADING } from "../../slice/slice";
 import { useDispatch } from "react-redux";
 import { RootState } from "../../slice/stateStore";
 import { useSelector } from "react-redux";
-import { useState, useRef ,useEffect} from "react";
+import { useState, useRef, useEffect } from "react";
 import PasswordField from "./PasswordField";
-import GoogleOneTapLogin from "./GoogleOneTapLogin";
+import axios from "axios";
+
 const Login = () => {
-  // Type the refs correctly
-  const nameRef = useRef<HTMLInputElement | null>(null);
+  const usernameRef = useRef<HTMLInputElement | null>(null);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const confirmPasswordRef = useRef<HTMLInputElement | null>(null);
 
-  const [title,setTitle] = useState<string>("Login");
+  const [title, setTitle] = useState<string>("Login");
   const dispatch = useDispatch();
   const [isRegister, setIsRegister] = useState(false);
   const user = useSelector((state: RootState) => state.user);
@@ -32,34 +32,114 @@ const Login = () => {
     dispatch(SET_LOGIN_CLOSE());
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+    dispatch(START_LOADING());
 
-    //testing loading
-    dispatch(START_LOADING())
-    setTimeout(()=>{
-      dispatch(END_LOADING())
-    },6000)
-    //testing
-    const Password=passwordRef.current?.value;
-    const ConfirmPassword=confirmPasswordRef.current?.value;
-    if(Password!==ConfirmPassword){
-      dispatch(UPDATE_ALERT({
-        ...user,
-        alert:{
-          open:true,
-          severity:"error",
-          message:'Passwords do not match',
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
+    const username = usernameRef.current?.value; 
+
+    if (isRegister) {
+      const confirmPassword = confirmPasswordRef.current?.value;
+      if (password !== confirmPassword) {
+        dispatch(
+          UPDATE_ALERT({
+            ...user,
+            alert: {
+              open: true,
+              severity: "error",
+              message: "Passwords do not match",
+            },
+          })
+        );
+        dispatch(END_LOADING());
+        return;
+      }
+
+      try {
+        const response = await axios.post("http://127.0.0.1:3000/signup", {
+          username,
+          email,
+          password,
+        });
+        const token=response.data.token;
+       
+        if (token){
+          localStorage.setItem("jwtToken", token);
           
         }
-      }))
+        dispatch(
+          UPDATE_ALERT({
+            ...user,
+            alert: {
+              open: true,
+              severity: "success",
+              message: "Registration successful!",
+            },
+          })
+        );
+        setIsRegister(false);
+     
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (error) {
+        dispatch(
+          UPDATE_ALERT({
+            ...user,
+            alert: {
+              open: true,
+              severity: "error",
+              message: "Registration failed!",
+            },
+          })
+        );
+      }
+    } else {
+      try {
+        const response=await axios.post("http://127.0.0.1:3000/login", {
+          email,
+          password,
+        });
+        const token=response.data.token;
+       
+        if (token){
+          localStorage.setItem("jwtToken", token);
+          
+        }
+        
+        dispatch(
+          UPDATE_ALERT({
+            ...user,
+            alert: {
+              open: true,
+              severity: "success",
+              message: "Login successful!",
+            },
+          })
+        );
+        handleClose();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (error) {
+        dispatch(
+          UPDATE_ALERT({
+            ...user,
+            alert: {
+              open: true,
+              severity: "error",
+              message: "Login failed!",
+            },
+          })
+        );
+      }
     }
+
+    dispatch(END_LOADING());
   };
+
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    isRegister ? setTitle('Register') : setTitle('Login');
+    setTitle(isRegister ? "Register" : "Login");
   }, [isRegister]);
+
   return (
     <Dialog open={user.IsLoginOpen} onClose={handleClose}>
       <DialogTitle>
@@ -86,11 +166,11 @@ const Login = () => {
               autoFocus
               margin="normal"
               variant="standard"
-              id="name"
+              id="username"
               label="Name"
               type="text"
               fullWidth
-              inputRef={nameRef}
+              inputRef={usernameRef}
               inputProps={{ minLength: 2 }}
               required
             />
@@ -128,9 +208,6 @@ const Login = () => {
         <Button onClick={() => setIsRegister(!isRegister)}>
           {isRegister ? "Login" : "Register"}
         </Button>
-      </DialogActions>
-      <DialogActions sx={{ justifyContent: "center", py: "24px" }}>
-        <GoogleOneTapLogin />
       </DialogActions>
     </Dialog>
   );
