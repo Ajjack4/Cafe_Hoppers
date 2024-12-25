@@ -34,7 +34,7 @@ const GoogleOneTapLogin = () => {
       });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       window.google.accounts.id.prompt((notification: any) => {
-        if (notification.isNotDisplayed) {
+        if (notification.isNotDisplayed()) {
           throw new Error('Try to clear the cookies or try again later!');
         }
         if (notification.isSkippedMoment() || notification.isDismissedMoment()) {
