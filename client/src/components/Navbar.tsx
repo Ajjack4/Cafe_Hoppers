@@ -155,7 +155,7 @@
 import React, { useState, useEffect } from "react";
 import logo from "../assets/Seekerra-logo.png";
 import Usericon from "./User/Usericon";
-import { SET_LOGIN_OPEN } from "../slice/slice";
+import { SET_LOGIN_OPEN ,UPDATE_COORDINATES} from "../slice/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../slice/stateStore";
 import axios from "axios";
@@ -183,19 +183,34 @@ interface SearchValue {
     latitude: number;
   };
 }
-
+interface Coordinates{
+  longitude: number;
+  latitude: number;
+}
 const Navbar = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
+  
 
   const handleLogin = () => {
     dispatch(SET_LOGIN_OPEN());
+  };
+  const updateCoordinates = (coord:Coordinates) => {
+    dispatch(UPDATE_COORDINATES({ longitude: coord.longitude, latitude: coord.latitude ,change: true})); 
+  };
+  const handleSuggestionClick = (suggestion: SearchValue) => {
+    
+    setinputvalue(suggestion.name);
+    setShowDropdown(false);
+    const coord:Coordinates={longitude:suggestion.coordinates.longitude, latitude:suggestion.coordinates.latitude};
+    console.log("coord",coord);
+    updateCoordinates(coord); // Update coordinates when a suggestion is clicked
   };
 
   const [inputvalue, setinputvalue] = useState("");
   const [searchquery, setsearchquery] = useState<SearchValue[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
-
+  
   useEffect(() => {
     const fetchData = async () => {
       if (inputvalue.length > 0) {
@@ -230,10 +245,7 @@ const Navbar = () => {
     fetchData();
   }, [inputvalue]);
 
-  const handleSuggestionClick = (suggestion: SearchValue) => {
-    setinputvalue(suggestion.name);
-    setShowDropdown(false); // Hide the dropdown after selection
-  };
+  
 
   return (
     <nav className="bg-white shadow-md dark:bg-gray-900">
@@ -260,6 +272,7 @@ const Navbar = () => {
                   key={index}
                   className="px-4 py-2 text-sm cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700"
                   onClick={() => handleSuggestionClick(suggestion)}
+                  
                 >
                   {suggestion.name}
                 </li>

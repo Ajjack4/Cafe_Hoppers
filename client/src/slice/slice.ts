@@ -12,6 +12,11 @@ type User = {
   Loading: boolean;
   alert:alerttype
 };
+type Coordinates={
+  longitude:number
+  latitude:number
+  change:boolean
+}
 const initialState: User = {
   name: null,
   IsLoginOpen: false,
@@ -44,9 +49,28 @@ export const UserSlice = createSlice({
     END_LOADING(state){
       state.Loading=false
     },
-   
+    
   },
 });
+export const CoordinatesService =createSlice({
+  name: "coordinates",
+  initialState: {
+    longitude:73.8567,
+    latitude:18.5204,
+    change:false
+  },
+  reducers: {
+    UPDATE_COORDINATES(state, action:PayloadAction<Coordinates>) {
+      state.longitude=action.payload.longitude
+      state.latitude=action.payload.latitude
+      state.change=action.payload.change
+      console.log("updated")
+    },
+  },
+
+})
 export const { UPDATEUSER ,SET_LOGIN_OPEN,SET_LOGIN_CLOSE,UPDATE_ALERT,START_LOADING,END_LOADING} = UserSlice.actions;
+export const {UPDATE_COORDINATES}=CoordinatesService.actions
 export const userReducer=UserSlice.reducer;
+export const CoordinatesReducer=CoordinatesService.reducer
 export default UserSlice.reducer;
