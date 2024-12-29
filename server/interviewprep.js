@@ -90,10 +90,47 @@ const users = [
 // }
 // console.log(curry(5)(2,3))
  
-const es=(arr,el)=>{
+// const es=(arr,el)=>{
     
-    return [...arr,el]
-}
-let num=[1,2]
-console.log(es(num,3))
-console.log(num)
+//     return [...arr,el]
+// }
+// let num=[1,2]
+// console.log(es(num,3))
+// console.log(num)
+// const isexist=users.some((user)=>user.firstname=="John")
+// if (isexist){
+//     console.log(isexist)
+// }
+// const unique=arr={
+//     unq:new Set(arr)
+
+// }
+// const nums=[1,2,5,2,4,5,2,3,7,1]
+// const unq=(arr)=>{
+//    const result=[]
+//    arr.forEach((num)=>{
+//     if(!result.includes(num)){
+//       result.push[num]
+//     }
+//    })
+// }
+// console.log(unq(nums))
+// const names=users.map((user)=>user.firstname+" "+user.lastname)
+// function printnames(){
+//     console.log(names)
+// }
+// // console.log(names)
+// printnames()
+
+// const outer=(a)=>{
+//     return function inner(b){
+//         console.log(a,b)
+//     }
+// }
+// const func=outer("a")
+// func("b")
+console.log(1)
+setTimeout(()=>{
+    console.log(2)
+},0)
+console.log(3)

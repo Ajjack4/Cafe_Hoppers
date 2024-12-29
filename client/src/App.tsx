@@ -1,4 +1,5 @@
 import Home from './pages/Home'
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 // import {UPDATEUSER} from './slice/slice'
 // import { useDispatch } from 'react-redux';
