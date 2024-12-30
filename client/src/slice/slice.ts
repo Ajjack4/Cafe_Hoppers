@@ -64,7 +64,7 @@ export const CoordinatesService =createSlice({
       state.longitude=action.payload.longitude
       state.latitude=action.payload.latitude
       state.change=action.payload.change
-      console.log("updated")
+      
     },
   },
 

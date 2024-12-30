@@ -2,38 +2,20 @@ import Login from "../components/User/Login";
 import Navbar from "../components/Navbar";
 import Notification from "../components/Notification";
 import Loading from "../components/Loading";
-import Map, { Marker, Popup } from "react-map-gl";
-import { useState,useEffect } from "react";
-import { UPDATE_COORDINATES} from "../slice/slice";
-// import Pin from "@mui/icons-material/LocationOn";
-// import StarIcon from "@mui/icons-material/Star";
-// import StarHalfIcon from "@mui/icons-material/StarHalf";
+import Map from "react-map-gl";
+import { useState} from "react";
+import { UPDATE_COORDINATES } from "../slice/slice";
 import { RootState } from "@/slice/stateStore";
 import { useDispatch, useSelector } from "react-redux";
+
 const Home = () => {
   const dispatch = useDispatch();
   const Coordinates = useSelector((state: RootState) => state.coordinates);
-  const [viewState, setViewState] = useState({
-    longitude:73.8567,
-    latitude: 18.5204,
-    zoom: 11.5,
-  });
-  // const [popupstate, setpopupstate] = useState(true);
-
-
- useEffect(()=>{
-  console.log('Coordinates change',Coordinates.change)
-  setViewState({
-    longitude: Coordinates.longitude,
-    latitude: Coordinates.latitude,
-    zoom: 11.5,
-  });
-   const updateCoordinates = () => {
-      dispatch(UPDATE_COORDINATES({ longitude: Coordinates.longitude, latitude: Coordinates.latitude ,change: false})); 
-    };
-  updateCoordinates();  // Call the function when Coordinates change is true
- },[Coordinates.change==true])
- 
+  const [zoom,setZoom]=useState(11.5)
+  // useEffect(() => {
+  //   console.log("Coordinates updated", Coordinates);
+  // }, [Coordinates]);
+  
   return (
     <div className="h-screen w-screen overflow-hidden">
       <Loading />
@@ -43,11 +25,27 @@ const Home = () => {
       <div className="relative h-full w-full z-10">
         <Map
           mapboxAccessToken={import.meta.env.VITE_MAPBOX}
-          {...viewState}
-          onMove={(evt) => setViewState(evt.viewState)}
+          longitude={Coordinates.longitude}
+          latitude={Coordinates.latitude}
+          zoom={zoom}
+          onMove={(evt) => {
+            const { longitude, latitude, zoom } = evt.viewState;
+            dispatch(
+              UPDATE_COORDINATES({ longitude, latitude, change: false })
+            );
+            setZoom(zoom);
+          }}
           mapStyle="mapbox://styles/mapbox/streets-v9"
-        >
-          {/* <Marker longitude={73.8567} latitude={18.5204}>
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Home;
+
+
+  {/* <Marker longitude={73.8567} latitude={18.5204}>
             <Pin
               style={{
                 fontSize: viewState.zoom * 2,
@@ -94,12 +92,3 @@ const Home = () => {
               </div>
             </div>
           </Popup> */}
-        </Map>
-      </div>
-    </div>
-  );
-};
-
-export default Home;
-
-
