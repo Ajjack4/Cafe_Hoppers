@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/Ajjack4/fiber_auth/config"
+	// "github.com/Ajjack4/fiber_auth/config"
 	"github.com/Ajjack4/fiber_auth/database"
 	"github.com/Ajjack4/fiber_auth/router"
 
@@ -36,9 +36,9 @@ func customCORS() fiber.Handler {
 }
 func main() {
 	// Initialize the database
-	if err := config.InitDB(); err != nil {
-		log.Fatalf("Failed to connect to the database: %v", err)
-	}
+	// if err := config.InitDB(); err != nil {
+	// 	log.Fatalf("Failed to connect to the database: %v", err)
+	// }
 	// defer config.DB.Close()
 	database.MysqlConnectDb()
 
