@@ -7,6 +7,7 @@ import (
 )
 
 func SetupRoutes(app *fiber.App) {
+	//User routes
 	app.Post("/login", handlers.LoginHandler)
 	app.Post("/signup", handlers.SignupHandler)
 	auth := app.Group("/api/v1/auth")
@@ -14,5 +15,9 @@ func SetupRoutes(app *fiber.App) {
 	auth.Use("/", middlewares.Protected())
 	auth.Put("/update", handlers.UpdateHandler)
 	auth.Delete("/logout", handlers.DeleteHandler)
+
+	//Map Api routes
+	api := app.Group("/api/v1/getcafes")
+	api.Post("/", handlers.GetNeabyCafes)
 
 }

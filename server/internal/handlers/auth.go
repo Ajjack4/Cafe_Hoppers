@@ -4,19 +4,21 @@ import (
 	//"database/sql"
 	"errors"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/Ajjack4/fiber_auth/config"
 	"github.com/Ajjack4/fiber_auth/database"
 	"github.com/Ajjack4/fiber_auth/internal/logic"
 	"github.com/Ajjack4/fiber_auth/internal/models"
+
 	"gorm.io/gorm"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
 )
 
-var SecretKey = "supersecretkey"
+var SecretKey = os.Getenv("JWT_SECRET")
 
 type LoginRequest struct {
 	Username string `json:"username"`
@@ -24,33 +26,36 @@ type LoginRequest struct {
 }
 
 // SignupHandler handles user registration
+
 func SignupHandler(c *fiber.Ctx) error {
+	// Parse request body into User struct
 	var req models.User
 	if err := c.BodyParser(&req); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid request format"})
 	}
+
+	// Validate input fields
 	if req.Username == "" || req.Password == "" || req.Email == "" {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "All the input fields are required"})
 	}
-	Password, err := logic.HashPassword(req.Password)
+
+	// Hash password
+	hashedPassword, err := logic.HashPassword(req.Password)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to hash password", "details": err.Error()})
 	}
 
-	req.Password = Password
-	query := "INSERT INTO users (username, password, email) VALUES (?, ?, ?)"
-	result, err := config.DB.Exec(query, req.Username, req.Password, req.Email)
-	if err != nil {
+	// Update the password field in the request
+	req.Password = hashedPassword
+
+	// Save the user using GORM
+	if err := database.Database.Db.Create(&req).Error; err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to save user", "details": err.Error()})
 	}
 
-	insertID, err := result.LastInsertId()
-	if err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to get insert ID"})
-	}
-
+	// Generate a JWT token
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"user_id": insertID,
+		"user_id": req.ID, // GORM automatically populates the ID field after creation
 		"exp":     time.Now().Add(time.Minute * 30).Unix(),
 	})
 	signedToken, err := token.SignedString([]byte(SecretKey))
@@ -58,6 +63,7 @@ func SignupHandler(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Could not generate token"})
 	}
 
+	// Return the token in the response
 	return c.JSON(fiber.Map{"token": signedToken})
 }
 
