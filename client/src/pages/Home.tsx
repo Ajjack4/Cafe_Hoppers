@@ -2,21 +2,58 @@ import Login from "../components/User/Login";
 import Navbar from "../components/Navbar";
 import Notification from "../components/Notification";
 import Loading from "../components/Loading";
-import Map from "react-map-gl";
-import { useState} from "react";
+import Map, { Marker } from "react-map-gl";
+import { useEffect, useState } from "react";
 import { UPDATE_COORDINATES } from "../slice/slice";
 import { RootState } from "@/slice/stateStore";
 import { useDispatch, useSelector } from "react-redux";
-import {getNearbyCafes} from "../api/GetNeaby-cafes"
+import { getNearbyCafes } from "../api/GetNeaby-cafes";
+
+type Cafe = {
+  id: string; // Corresponds to `place_id`
+  name: string; // Corresponds to `name`
+  vicinity: string; // Corresponds to `vicinity`
+  rating: number; // Corresponds to `rating`
+  userRatingTotal: number; // Corresponds to `user_ratings_total`
+  openNow: boolean | null; // Corresponds to `opening_hours.open_now` (nullable if opening_hours is absent)
+  photoReference: string | null; // Corresponds to `photos[0]?.photo_reference` (nullable if no photos are available)
+  geometry:Geometry
+};
+type Geometry={
+  
+    lat: number;
+    lng: number;
+  
+}
+
 const Home = () => {
   const dispatch = useDispatch();
   const Coordinates = useSelector((state: RootState) => state.coordinates);
-  const [zoom,setZoom]=useState(14)
-  getNearbyCafes(Coordinates.longitude,Coordinates.latitude)
-  // useEffect(() => {
-  //   console.log("Coordinates updated", Coordinates);
-  // }, [Coordinates]);
-  
+  const [zoom, setZoom] = useState(14);
+  const [nearbyCafes, setNearbyCafes] = useState<Cafe[]>([]);
+  const [loadingCafes, setLoadingCafes] = useState(true);
+
+  // Fetch nearby cafes when coordinates change
+  useEffect(() => {
+    const fetchCafes = async () => {
+      try {
+        setLoadingCafes(true);
+        console.log(Coordinates.longitude, Coordinates.latitude)
+        const cafes = await getNearbyCafes(Coordinates.longitude, Coordinates.latitude);
+        setNearbyCafes(cafes);
+        console.log("cafes:",cafes)
+      } catch (error) {
+        console.error("Error fetching nearby cafes:", error);
+      } finally {
+        setLoadingCafes(false);
+      }
+    };
+
+    if (Coordinates.longitude && Coordinates.latitude) {
+      fetchCafes();
+    }
+  }, [Coordinates]);
+
   return (
     <div className="h-screen w-screen overflow-hidden">
       <Loading />
@@ -26,9 +63,11 @@ const Home = () => {
       <div className="relative h-full w-full z-10">
         <Map
           mapboxAccessToken={import.meta.env.VITE_MAPBOX}
-          longitude={Coordinates.longitude}
-          latitude={Coordinates.latitude}
-          zoom={zoom}
+          initialViewState={{
+            longitude: Coordinates.longitude || 73.8567, // Default longitude
+            latitude: Coordinates.latitude || 18.5204, // Default latitude
+            zoom: zoom,
+          }}
           onMove={(evt) => {
             const { longitude, latitude, zoom } = evt.viewState;
             dispatch(
@@ -37,13 +76,25 @@ const Home = () => {
             setZoom(zoom);
           }}
           mapStyle="mapbox://styles/mapbox/streets-v9"
-        />
+        >
+          {!loadingCafes &&
+            nearbyCafes.map((cafe) => (
+              <Marker
+                key={cafe.id}
+                longitude={cafe.geometry.lng}
+                latitude={cafe.geometry.lat}
+              >
+                <div>Cafe: {cafe.id}</div>
+              </Marker>
+            ))}
+        </Map>
       </div>
     </div>
   );
 };
 
 export default Home;
+
 
 
   {/* <Marker longitude={73.8567} latitude={18.5204}>
