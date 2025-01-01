@@ -17,7 +17,7 @@ func SetupRoutes(app *fiber.App) {
 	auth.Delete("/logout", handlers.DeleteHandler)
 
 	//Map Api routes
-	api := app.Group("/api/v1/getcafes")
-	api.Post("/", handlers.GetNeabyCafes)
+	api := app.Group("/api/v1/nearby-cafes")
+	api.Get("/", handlers.GetNeabyCafes)
 
 }

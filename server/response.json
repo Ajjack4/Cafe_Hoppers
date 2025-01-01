@@ -1,0 +1,50 @@
+{
+    "business_status": "CLOSED_TEMPORARILY",
+    "geometry": {
+        "location": {
+            "lat": 18.5240388,
+            "lng": 73.84383529999999
+        },
+        "viewport": {
+            "northeast": {
+                "lat": 18.5255034302915,
+                "lng": 73.84520768029151
+            },
+            "southwest": {
+                "lat": 18.5228054697085,
+                "lng": 73.84250971970849
+            }
+        }
+    },
+    "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/cafe-71.png",
+    "icon_background_color": "#FF9E67",
+    "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/cafe_pinlet",
+    "name": "Cafe Tin Tin",
+    "permanently_closed": true,
+    "photos": [
+        {
+            "height": 2340,
+            "html_attributions": [
+                "<a href=\"https://maps.google.com/maps/contrib/109234335468534136855\">VISHAL KACHHAWAH</a>"
+            ],
+            "photo_reference": "AWYs27yDgYgdmVRlxSYNLOQIfUKlDVn9bV9kWGlE880311HRdCVlb-r2Vmwdm-PEzhOuLNYDnpNLPhztfZl_anEyti3WRkUYPAb5i5dvAbyxC0hRRJr7KJcD8fKTy6LYg-WMXZ9ejmNG3glKi53uDqwbzF25nCJ3anE-2wBMLZ4NDwSK28J5",
+            "width": 4160
+        }
+    ],
+    "place_id": "ChIJR8C0O3_AwjsRQNJgczVx2XI",
+    "plus_code": {
+        "compound_code": "GRFV+JG Pune, Maharashtra, India",
+        "global_code": "7JCMGRFV+JG"
+    },
+    "rating": 4.5,
+    "reference": "ChIJR8C0O3_AwjsRQNJgczVx2XI",
+    "scope": "GOOGLE",
+    "types": [
+        "cafe",
+        "food",
+        "point_of_interest",
+        "establishment"
+    ],
+    "user_ratings_total": 4,
+    "vicinity": "1202/2, Ghole Road, Shivajinagar, Pune"
+}

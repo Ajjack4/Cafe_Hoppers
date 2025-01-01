@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
+
 	"net/http"
 	"os"
 
@@ -17,8 +18,8 @@ func GetNeabyCafes(c *fiber.Ctx) error {
 			"message": "Missing API key",
 		})
 	}
-	longitude := c.Query("lat")
-	latitude := c.Query("long")
+	longitude := c.Query("lng")
+	latitude := c.Query("lat")
 	if longitude == "" || latitude == "" {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"message": "Missing latitude and longitude parameters",
@@ -28,6 +29,7 @@ func GetNeabyCafes(c *fiber.Ctx) error {
 		"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=1500&type=cafe&key=%s",
 		latitude, longitude, apiKey,
 	)
+
 	resp, err := http.Get(url)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
@@ -48,7 +50,7 @@ func GetNeabyCafes(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to parse API response"})
 	}
 	cafes := make([]fiber.Map, 0)
-	for _, results := range placesResponse.Result {
+	for _, results := range placesResponse.Results {
 		photoURL := ""
 		if len(results.Photos) > 0 {
 			photoURL = fmt.Sprintf(
@@ -57,11 +59,17 @@ func GetNeabyCafes(c *fiber.Ctx) error {
 			)
 		}
 		cafes = append(cafes, fiber.Map{
-			"name":          results.Name,
-			"vicinity":      results.Vicinity,
-			"rating":        results.Rating,
-			"opening_hours": results.OpeningHours,
-			"photo":         photoURL,
+			"place_id":           results.Place_ID,
+			"name":               results.Name,
+			"vicinity":           results.Vicinity,
+			"rating":             results.Rating,
+			"user_ratings_total": results.User_Rating_Total,
+			"opening_hours":      results.OpeningHours.OpenNow,
+			"photo":              photoURL,
+			"geometry": fiber.Map{
+				"lat": results.Geometry.Location.Lat,
+				"lng": results.Geometry.Location.Lng,
+			},
 		})
 	}
 

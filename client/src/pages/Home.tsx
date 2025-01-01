@@ -7,11 +7,12 @@ import { useState} from "react";
 import { UPDATE_COORDINATES } from "../slice/slice";
 import { RootState } from "@/slice/stateStore";
 import { useDispatch, useSelector } from "react-redux";
-
+import {getNearbyCafes} from "../api/GetNeaby-cafes"
 const Home = () => {
   const dispatch = useDispatch();
   const Coordinates = useSelector((state: RootState) => state.coordinates);
-  const [zoom,setZoom]=useState(11.5)
+  const [zoom,setZoom]=useState(14)
+  getNearbyCafes(Coordinates.longitude,Coordinates.latitude)
   // useEffect(() => {
   //   console.log("Coordinates updated", Coordinates);
   // }, [Coordinates]);
