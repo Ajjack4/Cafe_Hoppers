@@ -2,15 +2,15 @@ import Login from "../components/User/Login";
 import Navbar from "../components/Navbar";
 import Notification from "../components/Notification";
 import Loading from "../components/Loading";
-import Map, { Marker } from "react-map-gl";
-import { useEffect, useState } from "react";
+import Map, { Marker, ViewStateChangeEvent } from "react-map-gl";
+import { useEffect, useRef, useState } from "react";
 import { UPDATE_COORDINATES } from "../slice/slice";
 import { RootState } from "@/slice/stateStore";
 import { useDispatch, useSelector } from "react-redux";
 import { getNearbyCafes } from "../api/GetNeaby-cafes";
 
 type Cafe = {
-  id: string; // Corresponds to `place_id`
+  place_id: string; // Corresponds to `place_id`
   name: string; // Corresponds to `name`
   vicinity: string; // Corresponds to `vicinity`
   rating: number; // Corresponds to `rating`
@@ -32,27 +32,49 @@ const Home = () => {
   const [zoom, setZoom] = useState(14);
   const [nearbyCafes, setNearbyCafes] = useState<Cafe[]>([]);
   const [loadingCafes, setLoadingCafes] = useState(true);
+  const debounceTimer=useRef<NodeJS.Timeout | null>(null)
+ 
 
+  const handleMapMove=(evt: ViewStateChangeEvent)=>{
+         const { longitude, latitude, zoom } = evt.viewState;
+            dispatch(
+              UPDATE_COORDINATES({ longitude, latitude, change: false })
+            );
+            setZoom(zoom);
+        if (debounceTimer.current){
+          clearTimeout(debounceTimer.current);
+        }
+        debounceTimer.current=setTimeout(()=>{
+            fetchCafes();
+        },1500)
+  }
+  const fetchCafes = async () => {
+    try {
+      setLoadingCafes(true);
+      
+      const cafes = await getNearbyCafes(Coordinates.longitude, Coordinates.latitude);
+      // const uniquescafes=cafes.filter(c=>nearbyCafes.includes(c))
+      // console.log(uniquescafes)
+      setNearbyCafes(cafes);
+      console.log("cafes:",cafes)
+    } catch (error) {
+      console.error("Error fetching nearby cafes:", error);
+    } finally {
+      setLoadingCafes(false);
+    }
+  };
   // Fetch nearby cafes when coordinates change
   useEffect(() => {
-    const fetchCafes = async () => {
-      try {
-        setLoadingCafes(true);
-        console.log(Coordinates.longitude, Coordinates.latitude)
-        const cafes = await getNearbyCafes(Coordinates.longitude, Coordinates.latitude);
-        setNearbyCafes(cafes);
-        console.log("cafes:",cafes)
-      } catch (error) {
-        console.error("Error fetching nearby cafes:", error);
-      } finally {
-        setLoadingCafes(false);
-      }
-    };
-
-    if (Coordinates.longitude && Coordinates.latitude) {
-      fetchCafes();
-    }
-  }, [Coordinates]);
+    
+ return ()=>{
+    fetchCafes()
+     if (debounceTimer.current){
+       clearTimeout(debounceTimer.current);
+     }
+  
+ }
+    
+  }, []);
 
   return (
     <div className="h-screen w-screen overflow-hidden">
@@ -68,23 +90,26 @@ const Home = () => {
             latitude: Coordinates.latitude || 18.5204, // Default latitude
             zoom: zoom,
           }}
-          onMove={(evt) => {
-            const { longitude, latitude, zoom } = evt.viewState;
-            dispatch(
-              UPDATE_COORDINATES({ longitude, latitude, change: false })
-            );
-            setZoom(zoom);
-          }}
+          onMove={
+            (evt) => {
+          //   // const { longitude, latitude, zoom } = evt.viewState;
+          //   // dispatch(
+          //   //   UPDATE_COORDINATES({ longitude, latitude, change: false })
+          //   // );
+          //   // setZoom(zoom);
+          handleMapMove(evt)
+          }
+          }
           mapStyle="mapbox://styles/mapbox/streets-v9"
         >
           {!loadingCafes &&
             nearbyCafes.map((cafe) => (
               <Marker
-                key={cafe.id}
+                key={cafe.place_id}
                 longitude={cafe.geometry.lng}
                 latitude={cafe.geometry.lat}
               >
-                <div>Cafe: {cafe.id}</div>
+                <div>Cafe: {cafe.place_id}</div>
               </Marker>
             ))}
         </Map>
