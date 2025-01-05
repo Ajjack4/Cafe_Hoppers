@@ -51,18 +51,24 @@ const Home = () => {
   const fetchCafes = async () => {
     try {
       setLoadingCafes(true);
-      
-      const cafes = await getNearbyCafes(Coordinates.longitude, Coordinates.latitude);
-      // const uniquescafes=cafes.filter(c=>nearbyCafes.includes(c))
-      // console.log(uniquescafes)
-      setNearbyCafes(cafes);
-      console.log("cafes:",cafes)
+
+      const cafes:Cafe[] = await getNearbyCafes(Coordinates.longitude, Coordinates.latitude);
+      const uniqueCafes:Cafe[] =[]
+      cafes.forEach((cafe:Cafe)=>{
+        if(!nearbyCafes.includes(cafe)){
+          uniqueCafes.push(cafe);
+        }
+      })
+
+      setNearbyCafes([...nearbyCafes,...uniqueCafes]);
+      console.log("cafes:",nearbyCafes)
     } catch (error) {
       console.error("Error fetching nearby cafes:", error);
     } finally {
       setLoadingCafes(false);
     }
   };
+
   // Fetch nearby cafes when coordinates change
   useEffect(() => {
     
