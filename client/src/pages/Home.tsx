@@ -8,6 +8,7 @@ import { UPDATE_COORDINATES } from "../slice/slice";
 import { RootState } from "@/slice/stateStore";
 import { useDispatch, useSelector } from "react-redux";
 import { getNearbyCafes } from "../api/GetNeaby-cafes";
+import PlaceCard from "../components/ui/place-card";
 
 type Cafe = {
   place_id: string; // Corresponds to `place_id`
@@ -89,12 +90,21 @@ const Home = () => {
       <Navbar />
       <Login />
       <div className="relative h-full w-full z-10">
+      {/* <PlaceCard
+        imageSrc="/placeholder.svg?height=192&width=384"
+        name="Cozy Cafe"
+        rating={4.5}
+        reviewCount={123}
+        isOpen={true}
+        address="123 Main St, Anytown, USA 12345"
+      /> */}
         <Map
           mapboxAccessToken={import.meta.env.VITE_MAPBOX}
           initialViewState={{
             longitude: Coordinates.longitude || 73.8567, // Default longitude
             latitude: Coordinates.latitude || 18.5204, // Default latitude
             zoom: zoom,
+            
           }}
           onMove={
             (evt) => {
@@ -115,7 +125,7 @@ const Home = () => {
                 longitude={cafe.geometry.lng}
                 latitude={cafe.geometry.lat}
               >
-                <div>Cafe: {cafe.place_id}</div>
+                <div>Cafe: {cafe.name}</div>
               </Marker>
             ))}
         </Map>
