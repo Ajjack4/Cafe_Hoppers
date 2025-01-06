@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import logo from "../assets/Seekerra-logo.png";
+import logo from "../assets/cafe_hopper_logo.png";
 import Usericon from "./User/Usericon";
 import { SET_LOGIN_OPEN, UPDATE_COORDINATES } from "../slice/slice";
 import { useDispatch, useSelector } from "react-redux";
@@ -113,7 +113,7 @@ const Navbar = () => {
       <div className="max-w-screen-xl mx-auto flex items-center justify-between p-4">
         {/* Logo */}
         <a href="/" className="flex items-center">
-          <img src={logo} className="h-8" alt="Seekerra Logo" />
+          <img src={logo} className="h-11" alt="Seekerra Logo" />
         </a>
 
         {/* Search Bar */}

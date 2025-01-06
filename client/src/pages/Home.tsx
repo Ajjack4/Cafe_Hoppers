@@ -42,6 +42,7 @@ const Home = () => {
               UPDATE_COORDINATES({ longitude, latitude, change: false })
             );
             setZoom(zoom);
+            console.log(evt.target.getBounds)
         if (debounceTimer.current){
           clearTimeout(debounceTimer.current);
         }
