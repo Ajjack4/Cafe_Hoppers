@@ -2,7 +2,7 @@ import Login from "../components/User/Login";
 import Navbar from "../components/Navbar";
 import Notification from "../components/Notification";
 import Loading from "../components/Loading";
-import Map, { Marker, ViewStateChangeEvent } from "react-map-gl";
+import Map, { Marker, Popup, ViewStateChangeEvent } from "react-map-gl";
 import { useEffect, useRef, useState } from "react";
 import { UPDATE_COORDINATES } from "../slice/slice";
 import { RootState } from "@/slice/stateStore";
@@ -54,13 +54,13 @@ const Home = () => {
       setLoadingCafes(true);
 
       const cafes:Cafe[] = await getNearbyCafes(Coordinates.longitude, Coordinates.latitude);
-      const uniqueCafes:Cafe[] =[]
-      cafes.forEach((cafe:Cafe)=>{
-        if(!nearbyCafes.includes(cafe)){
-          uniqueCafes.push(cafe);
-        }
-      })
-
+      // const uniqueCafes:Cafe[] =[]
+      // cafes.forEach((cafe:Cafe)=>{
+      //   if(!nearbyCafes.includes(cafe)){
+      //     uniqueCafes.push(cafe);
+      //   }
+      // })
+      const uniqueCafes: Cafe[] = cafes.filter(cafe => !nearbyCafes.some(nc => nc.place_id === cafe.place_id));
       setNearbyCafes([...nearbyCafes,...uniqueCafes]);
       console.log("cafes:",nearbyCafes)
     } catch (error) {
@@ -125,7 +125,9 @@ const Home = () => {
                 longitude={cafe.geometry.lng}
                 latitude={cafe.geometry.lat}
               >
-                <div>Cafe: {cafe.name}</div>
+                {/* <Popup>
+
+                </Popup> */}
               </Marker>
             ))}
         </Map>
