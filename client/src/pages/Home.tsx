@@ -33,12 +33,13 @@ const Home = () => {
   const [nearbyCafes, setNearbyCafes] = useState<Cafe[]>([]);
   const [loadingCafes, setLoadingCafes] = useState(true);
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
-  const [hoveredCafe, setHoveredCafe] = useState<string|null>(null)
+  const CafeHoverDebounceTimer=useRef<NodeJS.Timeout | null>(null);
+  const [hoveredCafe, setHoveredCafe] = useState<string | null>(null);
   const handleMapMove = (evt: ViewStateChangeEvent) => {
     const { longitude, latitude, zoom } = evt.viewState;
     dispatch(UPDATE_COORDINATES({ longitude, latitude, change: false }));
     setZoom(zoom);
-    console.log(evt.target.getBounds);
+    // console.log(evt.target.getBounds);
     if (debounceTimer.current) {
       clearTimeout(debounceTimer.current);
     }
@@ -54,7 +55,7 @@ const Home = () => {
         Coordinates.longitude,
         Coordinates.latitude
       );
-      
+
       const uniqueCafes: Cafe[] = cafes.filter(
         (cafe) => !nearbyCafes.some((nc) => nc.place_id === cafe.place_id)
       );
@@ -84,14 +85,7 @@ const Home = () => {
       <Navbar />
       <Login />
       <div className="relative h-full w-full z-10">
-        {/* <PlaceCard
-        imageSrc="/placeholder.svg?height=192&width=384"
-        name="Cozy Cafe"
-        rating={4.5}
-        reviewCount={123}
-        isOpen={true}
-        address="123 Main St, Anytown, USA 12345"
-      /> */}
+      
         <Map
           mapboxAccessToken={import.meta.env.VITE_MAPBOX}
           initialViewState={{
@@ -100,11 +94,7 @@ const Home = () => {
             zoom: zoom,
           }}
           onMove={(evt) => {
-            //   // const { longitude, latitude, zoom } = evt.viewState;
-            //   // dispatch(
-            //   //   UPDATE_COORDINATES({ longitude, latitude, change: false })
-            //   // );
-            //   // setZoom(zoom);
+          
             handleMapMove(evt);
           }}
           mapStyle="mapbox://styles/mapbox/streets-v9"
@@ -117,8 +107,23 @@ const Home = () => {
                 latitude={cafe.geometry.lat}
               >
                 <div
-                  onMouseEnter={() => setHoveredCafe(cafe.place_id)}
-                  onMouseLeave={() => setHoveredCafe(null)}
+                  onMouseEnter={() => {
+                    setHoveredCafe(cafe.place_id);
+                    console.log("mouse enter")
+                    if (CafeHoverDebounceTimer.current) {
+                      clearTimeout(CafeHoverDebounceTimer.current);
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    
+                    console.log("mouse leave")
+                    CafeHoverDebounceTimer.current = setTimeout(() => {
+                      setHoveredCafe(null);
+                    }, 1500);
+                    // setTimeout(() => {
+                    //   setHoveredCafe(null);
+                    // }, 2000);
+                  }}
                 >
                   <div className="marker" />
                   <img
@@ -128,32 +133,30 @@ const Home = () => {
                     height="44"
                     className="cursor-pointer"
                   />
-                  
-                  {hoveredCafe===cafe.place_id&&
-                     <Popup
-                    className="popup"
-                    latitude={cafe.geometry.lat}
-                    longitude={cafe.geometry.lng}
-                    closeButton={false}
-                    anchor="bottom"
-                    style={{
-                      display: "block",
-                      borderRadius: "10px",
-                      padding: "0px",
-                    }}
-                  >
-                    <PlaceCard
-                      imageSrc={cafe.photoReference || ""}
-                      name={cafe.name}
-                      rating={cafe.rating}
-                      reviewCount={cafe.userRatingTotal}
-                      isOpen={cafe.openNow || false}
-                      address={cafe.vicinity}
-                    />
-                  </Popup> 
-                  }
-                  
-                  
+
+                  {hoveredCafe === cafe.place_id && (
+                    <Popup
+                      className="popup"
+                      latitude={cafe.geometry.lat}
+                      longitude={cafe.geometry.lng}
+                      closeButton={false}
+                      anchor="bottom"
+                      style={{
+                        display: "block",
+                        borderRadius: "10px",
+                        padding: "0px",
+                      }}
+                    >
+                      <PlaceCard
+                        imageSrc={cafe.photoReference || ""}
+                        name={cafe.name}
+                        rating={cafe.rating}
+                        reviewCount={cafe.userRatingTotal}
+                        isOpen={cafe.openNow || false}
+                        address={cafe.vicinity}
+                      />
+                    </Popup>
+                  )}
                 </div>
               </Marker>
             ))}
@@ -164,4 +167,3 @@ const Home = () => {
 };
 
 export default Home;
-
