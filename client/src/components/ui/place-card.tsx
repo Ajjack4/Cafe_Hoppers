@@ -1,16 +1,14 @@
-
-
-import { Star, MapPin } from 'lucide-react'
-import { Card, CardContent, CardFooter } from "../ui/card"
-import { Button } from "../ui/button"
+import { Star } from 'lucide-react';
+import { Card, CardContent, CardFooter } from "../ui/card";
+import { Button } from "../ui/button";
 
 interface PlaceCardProps {
-  imageSrc: string
-  name: string
-  rating: number
-  reviewCount: number
-  isOpen: boolean
-  address: string
+  imageSrc: string;
+  name: string;
+  rating: number;
+  reviewCount: number;
+  isOpen: boolean;
+  address: string;
 }
 
 export default function PlaceCard({ 
@@ -19,20 +17,20 @@ export default function PlaceCard({
   rating, 
   reviewCount, 
   isOpen, 
-  address 
+ 
 }: PlaceCardProps) {
   return (
-    <Card className="w-full max-w-sm overflow-hidden">
-      <div className="relative h-48 w-full">
+    <Card className="w-full max-w-md overflow-hidden">
+      <div className="relative h-32 w-full">
         <img
           src={imageSrc}
           alt={name}
-        //   layout="fill"
-        //   objectFit="cover"
+          loading="lazy"
+          className="h-full w-full object-cover"
         />
       </div>
-      <CardContent className="p-4">
-        <h2 className="text-xl font-semibold mb-2">{name}</h2>
+      <CardContent className="p-2">
+        <h2 className="text-lg font-semibold mb-2">{name}</h2>
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center">
             <Star className="h-5 w-5 text-yellow-400 fill-current" />
@@ -43,15 +41,14 @@ export default function PlaceCard({
             {isOpen ? 'Open' : 'Closed'}
           </span>
         </div>
-        <div className="flex items-start text-sm text-gray-500 mb-4">
+        {/* <div className="flex items-start text-sm text-gray-500">
           <MapPin className="h-4 w-4 mr-1 mt-1 flex-shrink-0" />
           <span>{address}</span>
-        </div>
+        </div> */}
       </CardContent>
-      <CardFooter>
-        <Button className="w-full hover:bg-black hover:text-white ">View Reviews</Button>
+      <CardFooter className="p-4">
+        <Button className="w-full hover:bg-black hover:text-white">View Reviews</Button>
       </CardFooter>
     </Card>
-  )
+  );
 }
-

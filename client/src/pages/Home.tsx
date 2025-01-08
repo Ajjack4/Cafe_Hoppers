@@ -16,9 +16,10 @@ type Cafe = {
   name: string; // Corresponds to `name`
   vicinity: string; // Corresponds to `vicinity`
   rating: number; // Corresponds to `rating`
-  userRatingTotal: number; // Corresponds to `user_ratings_total`
+
+  user_ratings_total: number; // Corresponds to `user_ratings_total`
   openNow: boolean | null; // Corresponds to `opening_hours.open_now` (nullable if opening_hours is absent)
-  photoReference: string | null; // Corresponds to `photos[0]?.photo_reference` (nullable if no photos are available)
+  photo: string | null; // Corresponds to `photos[0]?.photo_reference` (nullable if no photos are available)
   geometry: Geometry;
 };
 type Geometry = {
@@ -33,7 +34,7 @@ const Home = () => {
   const [nearbyCafes, setNearbyCafes] = useState<Cafe[]>([]);
   const [loadingCafes, setLoadingCafes] = useState(true);
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
-  const CafeHoverDebounceTimer=useRef<NodeJS.Timeout | null>(null);
+  const CafeHoverDebounceTimer = useRef<NodeJS.Timeout | null>(null);
   const [hoveredCafe, setHoveredCafe] = useState<string | null>(null);
   const handleMapMove = (evt: ViewStateChangeEvent) => {
     const { longitude, latitude, zoom } = evt.viewState;
@@ -85,7 +86,6 @@ const Home = () => {
       <Navbar />
       <Login />
       <div className="relative h-full w-full z-10">
-      
         <Map
           mapboxAccessToken={import.meta.env.VITE_MAPBOX}
           initialViewState={{
@@ -94,7 +94,6 @@ const Home = () => {
             zoom: zoom,
           }}
           onMove={(evt) => {
-          
             handleMapMove(evt);
           }}
           mapStyle="mapbox://styles/mapbox/streets-v9"
@@ -109,17 +108,17 @@ const Home = () => {
                 <div
                   onMouseEnter={() => {
                     setHoveredCafe(cafe.place_id);
-                    console.log("mouse enter")
+                    console.log("mouse enter");
                     if (CafeHoverDebounceTimer.current) {
                       clearTimeout(CafeHoverDebounceTimer.current);
                     }
+                    console.log("cafe photo reference:", cafe.photo);
                   }}
                   onMouseLeave={() => {
-                    
-                    console.log("mouse leave")
+                    console.log("mouse leave");
                     CafeHoverDebounceTimer.current = setTimeout(() => {
                       setHoveredCafe(null);
-                    }, 1500);
+                    }, 400);
                     // setTimeout(() => {
                     //   setHoveredCafe(null);
                     // }, 2000);
@@ -148,10 +147,10 @@ const Home = () => {
                       }}
                     >
                       <PlaceCard
-                        imageSrc={cafe.photoReference || ""}
+                        imageSrc={cafe.photo || ""}
                         name={cafe.name}
                         rating={cafe.rating}
-                        reviewCount={cafe.userRatingTotal}
+                        reviewCount={cafe.user_ratings_total}
                         isOpen={cafe.openNow || false}
                         address={cafe.vicinity}
                       />
