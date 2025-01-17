@@ -1,0 +1,472 @@
+{
+    "html_attributions": [],
+    "result": {
+        "address_components": [
+            {
+                "long_name": "No 365/65",
+                "short_name": "No 365/65",
+                "types": [
+                    "subpremise"
+                ]
+            },
+            {
+                "long_name": "16",
+                "short_name": "16",
+                "types": [
+                    "street_number"
+                ]
+            },
+            {
+                "long_name": "Jangali Maharaj Road",
+                "short_name": "Jangali Maharaj Rd",
+                "types": [
+                    "route"
+                ]
+            },
+            {
+                "long_name": "Shivajinagar",
+                "short_name": "Shivajinagar",
+                "types": [
+                    "sublocality_level_1",
+                    "sublocality",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "Pune",
+                "short_name": "Pune",
+                "types": [
+                    "locality",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "Pune",
+                "short_name": "Pune",
+                "types": [
+                    "administrative_area_level_3",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "Pune Division",
+                "short_name": "Pune Division",
+                "types": [
+                    "administrative_area_level_2",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "Maharashtra",
+                "short_name": "MH",
+                "types": [
+                    "administrative_area_level_1",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "India",
+                "short_name": "IN",
+                "types": [
+                    "country",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "411005",
+                "short_name": "411005",
+                "types": [
+                    "postal_code"
+                ]
+            }
+        ],
+        "adr_address": "S, No 365/65, <span class=\"street-address\">16, Jangali Maharaj Rd</span>, <span class=\"extended-address\">Shivajinagar</span>, <span class=\"locality\">Pune</span>, <span class=\"region\">Maharashtra</span> <span class=\"postal-code\">411005</span>, <span class=\"country-name\">India</span>",
+        "business_status": "OPERATIONAL",
+        "current_opening_hours": {
+            "open_now": true,
+            "periods": [
+                {
+                    "close": {
+                        "date": "2025-01-19",
+                        "day": 0,
+                        "time": "2330"
+                    },
+                    "open": {
+                        "date": "2025-01-19",
+                        "day": 0,
+                        "time": "0700"
+                    }
+                },
+                {
+                    "close": {
+                        "date": "2025-01-20",
+                        "day": 1,
+                        "time": "2330"
+                    },
+                    "open": {
+                        "date": "2025-01-20",
+                        "day": 1,
+                        "time": "0700"
+                    }
+                },
+                {
+                    "close": {
+                        "date": "2025-01-21",
+                        "day": 2,
+                        "time": "2330"
+                    },
+                    "open": {
+                        "date": "2025-01-21",
+                        "day": 2,
+                        "time": "0700"
+                    }
+                },
+                {
+                    "close": {
+                        "date": "2025-01-22",
+                        "day": 3,
+                        "time": "2330"
+                    },
+                    "open": {
+                        "date": "2025-01-22",
+                        "day": 3,
+                        "time": "0700"
+                    }
+                },
+                {
+                    "close": {
+                        "date": "2025-01-23",
+                        "day": 4,
+                        "time": "2330"
+                    },
+                    "open": {
+                        "date": "2025-01-23",
+                        "day": 4,
+                        "time": "0700"
+                    }
+                },
+                {
+                    "close": {
+                        "date": "2025-01-17",
+                        "day": 5,
+                        "time": "2330"
+                    },
+                    "open": {
+                        "date": "2025-01-17",
+                        "day": 5,
+                        "time": "0700"
+                    }
+                },
+                {
+                    "close": {
+                        "date": "2025-01-18",
+                        "day": 6,
+                        "time": "2330"
+                    },
+                    "open": {
+                        "date": "2025-01-18",
+                        "day": 6,
+                        "time": "0700"
+                    }
+                }
+            ],
+            "weekday_text": [
+                "Monday: 7:00 AM – 11:30 PM",
+                "Tuesday: 7:00 AM – 11:30 PM",
+                "Wednesday: 7:00 AM – 11:30 PM",
+                "Thursday: 7:00 AM – 11:30 PM",
+                "Friday: 7:00 AM – 11:30 PM",
+                "Saturday: 7:00 AM – 11:30 PM",
+                "Sunday: 7:00 AM – 11:30 PM"
+            ]
+        },
+        "delivery": true,
+        "dine_in": true,
+        "editorial_summary": {
+            "language": "en",
+            "overview": "A familiar menu of veg multicuisine standards served in a simple setting along the road."
+        },
+        "formatted_address": "S, No 365/65, 16, Jangali Maharaj Rd, Shivajinagar, Pune, Maharashtra 411005, India",
+        "formatted_phone_number": "089757 98671",
+        "geometry": {
+            "location": {
+                "lat": 18.5270619,
+                "lng": 73.8514569
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": 18.52849318029151,
+                    "lng": 73.85273483029151
+                },
+                "southwest": {
+                    "lat": 18.5257952197085,
+                    "lng": 73.85003686970849
+                }
+            }
+        },
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+        "icon_background_color": "#FF9E67",
+        "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet",
+        "international_phone_number": "+91 89757 98671",
+        "name": "Modern Cafe",
+        "opening_hours": {
+            "open_now": true,
+            "periods": [
+                {
+                    "close": {
+                        "day": 0,
+                        "time": "2330"
+                    },
+                    "open": {
+                        "day": 0,
+                        "time": "0700"
+                    }
+                },
+                {
+                    "close": {
+                        "day": 1,
+                        "time": "2330"
+                    },
+                    "open": {
+                        "day": 1,
+                        "time": "0700"
+                    }
+                },
+                {
+                    "close": {
+                        "day": 2,
+                        "time": "2330"
+                    },
+                    "open": {
+                        "day": 2,
+                        "time": "0700"
+                    }
+                },
+                {
+                    "close": {
+                        "day": 3,
+                        "time": "2330"
+                    },
+                    "open": {
+                        "day": 3,
+                        "time": "0700"
+                    }
+                },
+                {
+                    "close": {
+                        "day": 4,
+                        "time": "2330"
+                    },
+                    "open": {
+                        "day": 4,
+                        "time": "0700"
+                    }
+                },
+                {
+                    "close": {
+                        "day": 5,
+                        "time": "2330"
+                    },
+                    "open": {
+                        "day": 5,
+                        "time": "0700"
+                    }
+                },
+                {
+                    "close": {
+                        "day": 6,
+                        "time": "2330"
+                    },
+                    "open": {
+                        "day": 6,
+                        "time": "0700"
+                    }
+                }
+            ],
+            "weekday_text": [
+                "Monday: 7:00 AM – 11:30 PM",
+                "Tuesday: 7:00 AM – 11:30 PM",
+                "Wednesday: 7:00 AM – 11:30 PM",
+                "Thursday: 7:00 AM – 11:30 PM",
+                "Friday: 7:00 AM – 11:30 PM",
+                "Saturday: 7:00 AM – 11:30 PM",
+                "Sunday: 7:00 AM – 11:30 PM"
+            ]
+        },
+        "photos": [
+            {
+                "height": 3000,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/109211479304775376401\">Sanket Gaidhane</a>"
+                ],
+                "photo_reference": "AWYs27yfOjQU6BVeSVzZLOzBceqc1BUko7zVNLDM_nre2tfVsKn2jRwjLsOhSy3tQNrf_g7th2Puy3K61yL3_55a1ZZnu-qynO71l7gnVnZuHemR7VzzrUb_cYH5v_EMi9rAu1pWzTa2E5GK3NZGPd2j9in3OzNDfu2ApkbMxA1U0lhx0KgO",
+                "width": 4000
+            },
+            {
+                "height": 3072,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/114273128629502295397\">Alisha Rahulkar</a>"
+                ],
+                "photo_reference": "AWYs27y2zssccd-f1q9TSsqvGV91ThcJ2shxMnqZDYNvp_VmhyfdgkDUr5U1doBAgXP_YgMb51vmJ2tFqQ5rFIT7JV1s_7ZhSxw5g48u1fCJz4h0bDq-THpfl_yGg0hVYwbBm9JI23sb3bnL67mK1lWoLYItFSPWNfxOExFWjVchT3jLa-Qx",
+                "width": 4096
+            },
+            {
+                "height": 570,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/110186954498336442521\">Saikat Ghosh</a>"
+                ],
+                "photo_reference": "AWYs27wMlKN5fsnLjh3IoxlXKLz1ICh2S-o7vPNGjQf_YFKZc-jjwnWN63ejuhlL_RPvwRlJ7DFp3sOv6HagRDv9qLEseN_ogtQBjQg8G9ZZZ-YIf6TBt7EyvHe_rJvpEXbWyxvK7BqtCPgoWkIFJS0Z7UdYyT3gkgvG4ODaKq9yqdPh7VXy",
+                "width": 1055
+            },
+            {
+                "height": 818,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/118182362704921132962\">Ajit Shah</a>"
+                ],
+                "photo_reference": "AWYs27zcJWx0hCUrM2z5OulorM6F4o3dMtgnmABKHZCHH9I2UHPSD57PuYZ5fHvWPhs590k9m-Xf6ede21i3QHURGltdMntwaAYNX8AtOegtQidnzgVj_V1xOx-spF4YaFBlBUbtnDilU-ruTC1n9I-qkNBTsaUS2O-QmJVV-CqTpOCcZ5Tt",
+                "width": 745
+            },
+            {
+                "height": 3072,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/110787531768186038733\">Sagar Nevse</a>"
+                ],
+                "photo_reference": "AWYs27z4DC0xXasE7rzwDepfSpkWdDu3aLNl8B87Q8I4v3aIcoF2HbMLQp_4-gUZF2DPKBCS-8bytQqyYnoZ8IgDDhmwYHvsA_7XSX35ni_aMyLJ-NTEiwYnqfgF_64UUKU-GFdUrMSmwUv174I3l3m1JDWV1l_--6wWbkXrGAqcbAqZ2Ap1",
+                "width": 4080
+            },
+            {
+                "height": 1866,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/113978944545740430575\">akash khude</a>"
+                ],
+                "photo_reference": "AWYs27wbxh59k-HU8FGo28VAprDb9Ve5Oy9wXwBTbouukVQId7G_LNw-NwVV3uxiuVTNVLreZZM3ML2UvsFTOucSma-MtVpcigjRcPKrLUpmzKtIjMgDh4vpuw6wKxQf9QG-9xPkUbo83z3B_WZGrDRlqeDIOdtGJ5MmdPt6gWLpY2BjYjTa",
+                "width": 3321
+            },
+            {
+                "height": 419,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/118182362704921132962\">Ajit Shah</a>"
+                ],
+                "photo_reference": "AWYs27y32lxiRIRIATup4Gd1KARan-PGH2iUliiWNpSxLxs4ajEtYOc6Gz5cEwrb1EaMerVsLU1FczKXODhlOVNYtPEOd1pt1N2arQzBgBfA9U7bS_vNtM3DakctfPKjai6RFJ9lWE3fMjt9u-XYoi95OsQeFv18pt1XCv4nGqxLq7UH_YAm",
+                "width": 606
+            },
+            {
+                "height": 3072,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/116603430112709824988\">bhushan kapade</a>"
+                ],
+                "photo_reference": "AWYs27xrfQ9fuCv1SCdW3n0Mc58eQkW8r5riOCymItO7FVjqSRvE4RDn4JHnNG6nQnKpKaV6le4qKz1OQg1YYwqvwW_0jKsGasapezwYV64Ndl5H3V_Wr19kktInikub-hn8IfMklJ2zRJiIHnzMoCcX1OBzDgxdADuq_d8aIuS2NfSZuHwb",
+                "width": 4080
+            },
+            {
+                "height": 3072,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/111554203450416699250\">Aditya Kumbhar</a>"
+                ],
+                "photo_reference": "AWYs27z3OPg213v3JaYKqFY2K4u7jfofOTtNY02v0NCcW0QE7SJonyyWmoHCgTISaYSQqAz55k21XTgWz33er0axdZ5Le4NpqcHikHXXtMHgW8kjc2htnq6kB7V3yqVkt5ZTRZRliqGsHMqh0go9NEp6qq1W-iZYqzruG3WkPy2IOTfhMe-P",
+                "width": 4096
+            },
+            {
+                "height": 3000,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/116339044634480499377\">Akshay Kore</a>"
+                ],
+                "photo_reference": "AWYs27yFdxnXfhLB-Bkx9ONEmyIv_N9vt5B9R9uOLRb58r4QdOadxRBXdpdKaflmdPeq3qgntOq89u5mNtVQrGfn1FsPUrUmqr0y8Lclt7bZlZO2xI5FYZLFlCvkXXuqqwkvjtHfYmchiB8nXZDCyFKfAsGFtLRIdJsjIFfMNUWEHq-pqLf-",
+                "width": 4000
+            }
+        ],
+        "place_id": "ChIJIZjRBH3AwjsRsI0TTjXHZ6c",
+        "plus_code": {
+            "compound_code": "GVG2+RH Pune, Maharashtra, India",
+            "global_code": "7JCMGVG2+RH"
+        },
+        "price_level": 2,
+        "rating": 4,
+        "reference": "ChIJIZjRBH3AwjsRsI0TTjXHZ6c",
+        "reservable": true,
+        "reviews": [
+            {
+                "author_name": "Atreya Rahegaonkar",
+                "author_url": "https://www.google.com/maps/contrib/117742559242238339690/reviews",
+                "language": "en",
+                "original_language": "en",
+                "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXBUfKFCMJhGOLxqbQMVbJKyvApra16LWrJtxF9QIwkkQKbHxYw=s128-c0x00000000-cc-rp-mo",
+                "rating": 4,
+                "relative_time_description": "4 months ago",
+                "text": "I was in the locality and heard of the place so went there for Lunch. It's a nice place with a great ambiance and plenty of seats, but with a large number of seats comes small tables. The tables are pretty small if you are on a full-fledged lunch, but just fine if you're there for some snacks.\n\nAbout the service, it's too damn great. They continuously move around and are quick to receive any order. Also, they don't make any delay in serving the food.\n\nAnd the food is just fine. Maybe I didn't get something that is famous or they are known for, but it's nice.\n\nIt's surely a place you'd like to visit if you're nearby.\nAnd try to get a seat in the Family room or AC room which is on the inside, it's much better and calmer.",
+                "time": 1726539608,
+                "translated": false
+            },
+            {
+                "author_name": "rajpal singh",
+                "author_url": "https://www.google.com/maps/contrib/106512814160732162269/reviews",
+                "language": "en",
+                "original_language": "en",
+                "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVHDqiXaRN-kJ0mDdEoMI1luhhMKrPAWo1930ftEkfC7ULx4adx=s128-c0x00000000-cc-rp-mo-ba5",
+                "rating": 5,
+                "relative_time_description": "3 months ago",
+                "text": "I'm the biggest fan of this place.\n\nMust try cassata sundae one of my favorite dessert.\n\nAnd also it is famous for south Indian dishes like dosa, idli and all.... Prices are also affordable...\n\nI had one the biggest dosa in my life here.\n\nEverytime I visit here experience is awsome.\n\nDon't worry about ur vehicle also, they've their separate area for parking...\n\nVisit once to have good time with ur buddies.",
+                "time": 1728234421,
+                "translated": false
+            },
+            {
+                "author_name": "Piyush Kumbhojkar",
+                "author_url": "https://www.google.com/maps/contrib/101115793338384291488/reviews",
+                "language": "en",
+                "original_language": "en",
+                "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWX09E2MSxh7HtIuMg_Q4gUsOYYb7TvgUo3ME0BnbOZji8yaNMH=s128-c0x00000000-cc-rp-mo-ba4",
+                "rating": 4,
+                "relative_time_description": "a year ago",
+                "text": "This restaurant is very old. My parents told me that they used visit this restaurant whenever they were near this place. I got a chance to visit this place.\n\nThe place is in Shivaji Nagar area and was crowded but we managed to get the table easily.\n\nFood: We ordered their Veg Thali, Masala Dosa, Onion Uttapam and Special Veg Pizza.\n\n- Veg Thali contains 3 Subji, Rassam, Daal, Rice, Dahi Wati, One Sweet Dish, 2 Roti, Papad and Glass of Buttermilk. All items very good but not great but the quantity was huge.\n\n- Masala Dosa and Onion Uttapam was tasty and had a good portion. Within ordered food items these 2 were the best.\n\n- Special Veg Pizza had a lot of veggies and on top of that Cheese. This was Ok not the best.\n\nAmbience: Ambience was nice. Not the best but simple and neat. Service was bit slow. We always had to call the waiter.\n\nPrice: Food is cheaper here compared to the other restaurants in that area. Quality and Quantity is good compared to price.\n\nOverall it was a nice experience. Parent enjoyed their old memories. As per their feedback taste has changed but still it's good. May be Punjabi Cuisine is best. We haven't tried that. So you can definitely visit this place once.",
+                "time": 1692813594,
+                "translated": false
+            },
+            {
+                "author_name": "Vishal Mundphane",
+                "author_url": "https://www.google.com/maps/contrib/101722489404112441425/reviews",
+                "language": "en",
+                "original_language": "en",
+                "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjW2uQRXfo4-RToq4FY-HOD4mf_xbtnzKJz8KHGChMuVLu24M1g=s128-c0x00000000-cc-rp-mo-ba5",
+                "rating": 5,
+                "relative_time_description": "a year ago",
+                "text": "Ahhaa. Just Awesome.\nIt proves its name.\nIf you want to feel the proper old type hotel , then you must visit it.\nYou have quite a wait for your order.\nIt's always crowded with Official Workers.\nFood is awesome. Delicious ✌️\nAnd a big part is they have their own parking.",
+                "time": 1693026115,
+                "translated": false
+            },
+            {
+                "author_name": "Sagar Nevse",
+                "author_url": "https://www.google.com/maps/contrib/110787531768186038733/reviews",
+                "language": "en",
+                "original_language": "en",
+                "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXCj83F9_nNen3U7m4ffn7milwz_rAtD88Uq-9HmFHjOBpFgaNFIA=s128-c0x00000000-cc-rp-mo-ba4",
+                "rating": 4,
+                "relative_time_description": "in the last week",
+                "text": "I have been eating here for ages..\nAlways a pleasure",
+                "time": 1736569775,
+                "translated": false
+            }
+        ],
+        "serves_breakfast": true,
+        "serves_brunch": true,
+        "serves_dinner": true,
+        "serves_lunch": true,
+        "serves_vegetarian_food": true,
+        "takeout": true,
+        "types": [
+            "cafe",
+            "meal_delivery",
+            "meal_takeaway",
+            "store",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "url": "https://maps.google.com/?cid=12062829158692261296",
+        "user_ratings_total": 4928,
+        "utc_offset": 330,
+        "vicinity": "No 365/65, S, 16, Jangali Maharaj Road, Shivajinagar, Pune",
+        "wheelchair_accessible_entrance": false
+    },
+    "status": "OK"
+}
