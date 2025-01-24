@@ -75,3 +75,38 @@ func GetNeabyCafes(c *fiber.Ctx) error {
 
 	return c.JSON(fiber.Map{"cafes": cafes})
 }
+func GetNearbyCafeByID(c *fiber.Ctx) error {
+	apiKey := os.Getenv("UNRIVAL")
+	if apiKey == "" {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"message": "Missing API key",
+		})
+	}
+	placeId := c.Params("id")
+	if placeId == "" {
+		c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"message": "Missing Place Id params",
+		})
+	}
+	url := fmt.Sprintf(
+		"https://maps.googleapis.com/maps/api/place/details/json?place_id=%v&key=%v", placeId, apiKey,
+	)
+	resp, err := http.Get(url)
+	if err != nil {
+		c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "Failed To retrive Place Details",
+		})
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != 200 {
+		return c.Status(resp.StatusCode).JSON(fiber.Map{
+			"message": "Failed to retrievePlace Details",
+		})
+	}
+	var PlaceDetails models.PlaceDetailsResponse
+	if err := json.NewDecoder(resp.Body).Decode(&PlaceDetails); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to parse API response"})
+	}
+	return c.JSON(resp.Body)
+}

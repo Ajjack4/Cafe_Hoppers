@@ -34,5 +34,6 @@ func SetupRoutes(app *fiber.App) {
 		},
 	}))
 	api.Get("/", handlers.GetNeabyCafes)
+	api.Get("/place-detail/:id", handlers.GetNearbyCafeByID)
 
 }
