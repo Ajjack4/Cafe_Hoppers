@@ -3,7 +3,9 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 
+	"log"
 	"net/http"
 	"os"
 
@@ -82,31 +84,47 @@ func GetNearbyCafeByID(c *fiber.Ctx) error {
 			"message": "Missing API key",
 		})
 	}
+
 	placeId := c.Params("id")
 	if placeId == "" {
-		c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"message": "Missing Place Id params",
 		})
 	}
+
 	url := fmt.Sprintf(
 		"https://maps.googleapis.com/maps/api/place/details/json?place_id=%v&key=%v", placeId, apiKey,
 	)
+
 	resp, err := http.Get(url)
 	if err != nil {
-		c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"message": "Failed To retrive Place Details",
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "Failed To retrieve Place Details",
 		})
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != 200 {
+	if resp.StatusCode != http.StatusOK {
 		return c.Status(resp.StatusCode).JSON(fiber.Map{
-			"message": "Failed to retrievePlace Details",
+			"message": "Failed to retrieve Place Details",
 		})
 	}
+
 	var PlaceDetails models.PlaceDetailsResponse
-	if err := json.NewDecoder(resp.Body).Decode(&PlaceDetails); err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to parse API response"})
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "Failed to read API response",
+		})
 	}
-	return c.JSON(resp.Body)
+
+	log.Println(string(body)) // Log the raw response for debugging
+
+	if err := json.Unmarshal(body, &PlaceDetails); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": "Failed to parse API response",
+		})
+	}
+
+	return c.JSON(PlaceDetails)
 }
