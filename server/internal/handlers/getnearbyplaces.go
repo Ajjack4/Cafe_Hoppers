@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 
-	"log"
 	"net/http"
 	"os"
 
@@ -118,7 +117,7 @@ func GetNearbyCafeByID(c *fiber.Ctx) error {
 		})
 	}
 
-	log.Println(string(body)) // Log the raw response for debugging
+	// log.Println(string(body)) // Log the raw response for debugging
 
 	if err := json.Unmarshal(body, &PlaceDetails); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
