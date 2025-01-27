@@ -51,25 +51,26 @@ func GetNeabyCafes(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to parse API response"})
 	}
 	cafes := make([]fiber.Map, 0)
-	for _, results := range placesResponse.Results {
-		photoURL := ""
-		if len(results.Photos) > 0 {
-			photoURL = fmt.Sprintf(
-				"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=%s&key=%s",
-				results.Photos[0].PhotoReference, apiKey,
-			)
-		}
+	for _, result := range placesResponse.Results {
+		// photoURL := ""
+		// if len(results.Photos) > 0 {
+		// 	photoURL = fmt.Sprintf(
+		// 		"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=%s&key=%s",
+		// 		results.Photos[0].PhotoReference, apiKey,
+		// 	)
+		// }
+
 		cafes = append(cafes, fiber.Map{
-			"place_id":           results.Place_ID,
-			"name":               results.Name,
-			"vicinity":           results.Vicinity,
-			"rating":             results.Rating,
-			"user_ratings_total": results.User_Rating_Total,
-			"opening_hours":      results.OpeningHours.OpenNow,
-			"photo":              photoURL,
+			"place_id":           result.Place_ID,
+			"name":               result.Name,
+			"vicinity":           result.Vicinity,
+			"rating":             result.Rating,
+			"user_ratings_total": result.User_Rating_Total,
+			"opening_hours":      result.OpeningHours.OpenNow,
+			"photo":              result.Photos[0],
 			"geometry": fiber.Map{
-				"lat": results.Geometry.Location.Lat,
-				"lng": results.Geometry.Location.Lng,
+				"lat": result.Geometry.Location.Lat,
+				"lng": result.Geometry.Location.Lng,
 			},
 		})
 	}
