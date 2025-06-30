@@ -14,25 +14,20 @@ Built with **React (Vite)** on the frontend and **Go Fiber** on the backend, int
 
 ## 📸 Screenshots
 
-<table>
-  <tr>
-    <td align="center">
-      <img src="./client/src/assets/Cafe_Hopper_Main.png" alt="Home Page" width="300"/>
-      <br/>
-      <strong>Home Page</strong>
-    </td>
-    <td align="center">
-      <img src="./client/src/assets/Cafe_Hopper_Cafe_Card.png" alt="Cafe Card" width="300"/>
-      <br/>
-      <strong>Café Details</strong>
-    </td>
-    <td align="center">
-      <img src="./client/src/assets/Cafe_Hopper_Search_Bar.png" alt="Search Bar" width="300"/>
-      <br/>
-      <strong>Live Search</strong>
-    </td>
-  </tr>
-</table>
+<div align="center">
+  
+### 🏠 Home Page
+  
+<img src="./client/src/assets/Cafe_Hopper_Main.png" alt="Café Hopper Home Page" width="800"/>
+
+### 🏪 Café Details Card
+
+<img src="./client/src/assets/Cafe_Hopper_Cafe_Card.png" alt="Café Details Card" width="800"/>
+
+### 🔍 Live Search Feature
+
+<img src="./client/src/assets/Cafe_Hopper_Search_Bar.png" alt="Live Search Bar" width="800"/>
+</div>
 
 ---
 
@@ -85,7 +80,6 @@ cafe-hopper/
 │   ├── 📁 routes/
 │   ├── 📁 services/
 │   ├── 📁 middleware/
-│   ├── 📁 docs/               # Swagger documentation
 │   └── 📄 main.go
 │
 ├── 📄 docker-compose.yml
@@ -150,18 +144,6 @@ The backend API will be available at `http://localhost:5000`
 
 ---
 
-## 🐳 Docker Setup
-
-For a quick setup using Docker:
-
-```bash
-# Ensure your .env files are configured
-docker-compose up --build
-```
-
-This will spin up both frontend and backend containers with all dependencies.
-
----
 
 ## ⚡ Performance Optimizations
 
@@ -182,6 +164,8 @@ We welcome contributions! Here's how you can help:
 3. **✅ Commit** your changes (`git commit -m 'Add amazing feature'`)
 4. **🚀 Push** to the branch (`git push origin feature/amazing-feature`)
 5. **🔃 Open** a Pull Request
+
+---
 
 ### Development Guidelines
 - Follow existing code style and conventions
