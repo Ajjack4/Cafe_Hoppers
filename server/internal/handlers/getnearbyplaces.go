@@ -28,7 +28,7 @@ func GetNeabyCafes(c *fiber.Ctx) error {
 	}
 	url := fmt.Sprintf(
 		"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=1500&type=cafe&key=%s",
-		latitude, longitude, apiKey,
+		longitude, latitude, apiKey,
 	)
 
 	resp, err := http.Get(url)
@@ -52,13 +52,13 @@ func GetNeabyCafes(c *fiber.Ctx) error {
 	}
 	cafes := make([]fiber.Map, 0)
 	for _, result := range placesResponse.Results {
-		// photoURL := ""
-		// if len(results.Photos) > 0 {
-		// 	photoURL = fmt.Sprintf(
-		// 		"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=%s&key=%s",
-		// 		results.Photos[0].PhotoReference, apiKey,
-		// 	)
-		// }
+		photoURL := ""
+		if len(result.Photos) > 0 {
+			photoURL = fmt.Sprintf(
+				"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=%s&key=%s",
+				result.Photos[0].PhotoReference, apiKey,
+			)
+		}
 
 		cafes = append(cafes, fiber.Map{
 			"place_id":           result.Place_ID,
@@ -67,7 +67,7 @@ func GetNeabyCafes(c *fiber.Ctx) error {
 			"rating":             result.Rating,
 			"user_ratings_total": result.User_Rating_Total,
 			"opening_hours":      result.OpeningHours.OpenNow,
-			"photo":              result.Photos[0],
+			"photo":              photoURL,
 			"geometry": fiber.Map{
 				"lat": result.Geometry.Location.Lat,
 				"lng": result.Geometry.Location.Lng,
